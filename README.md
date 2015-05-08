@@ -8,6 +8,12 @@ A bloom filter contains an array of `m` bits, zero-initialized, along with `k` h
 
 BloomPy uses [Murmur](http://code.google.com/p/smhasher/) for hashing, with many thanks to Austin Appleby and Hajime Senuma.
 
+## But why?
+
+There are plenty of situations where a direct object lookup could be computationally or temporally costly, or otherwise undesirable. Particularly when dealing with complex databases at scale, table inclusion lookups are vastly more expensive than a bloom filter.
+
+For this reason, a particularly popular use case for bloom filters is DDoS defense (see [Yi, Yu, Zhou, Hai, and Bonti](http://www.sersc.org/journals/IJDTA/vol1_no1/papers/02.pdf), page 12); more generally, large automated blacklists or whitelists are a good candidate for bloom filter use.
+
 ## Installation
 
 Clone this repository and run `sudo python setup.py install`. (Skip the `sudo` if you're on Windows.)
