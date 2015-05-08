@@ -6,6 +6,8 @@ BloomPy is a simple [bloom filter](http://en.wikipedia.org/wiki/Bloom_filter) im
 
 A bloom filter contains an array of `m` bits, zero-initialized, along with `k` hash functions, mapping data onto the integers `(0,1,...,m-1)`. When a piece of data is stored in the bloom filter, it is run through each of the hash functions, and the bit in the bloom filter's array corresponding to the result of each hash function is set to 1. To check if a piece of data is in the bloom filter, it is again run through each of the hash functions, and the corresponding array elements are checked; if any are zero, then the data is not in the bloom filter.
 
+BloomPy uses [Murmur](http://code.google.com/p/smhasher/) for hashing, with many thanks to Austin Appleby and Hajime Senuma.
+
 ## Installation
 
 Clone this repository and run `sudo python setup.py install`. (Skip the `sudo` if you're on Windows.)
