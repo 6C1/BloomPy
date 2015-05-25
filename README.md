@@ -6,6 +6,14 @@ BloomPy is a simple [bloom filter](http://en.wikipedia.org/wiki/Bloom_filter) im
 
 A bloom filter contains an array of `m` bits, zero-initialized, along with `k` hash functions, mapping data onto the integers `(0,1,...,m-1)`. When a piece of data is stored in the bloom filter, it is run through each of the hash functions, and the bit in the bloom filter's array corresponding to the result of each hash function is set to 1. To check if a piece of data is in the bloom filter, it is again run through each of the hash functions, and the corresponding array elements are checked; if any are zero, then the data is not in the bloom filter.
 
+BloomPy uses [Murmur](http://code.google.com/p/smhasher/) for hashing, with many thanks to Austin Appleby and Hajime Senuma.
+
+## But why?
+
+There are plenty of situations where a direct object lookup could be computationally or temporally costly, or otherwise undesirable. Particularly when dealing with complex databases at scale, table inclusion lookups are vastly more expensive than a bloom filter.
+
+For this reason, a particularly popular use case for bloom filters is DDoS defense (see [Yi, Yu, Zhou, Hai, and Bonti](http://www.sersc.org/journals/IJDTA/vol1_no1/papers/02.pdf), page 12); more generally, large automated blacklists or whitelists are a good candidate for bloom filter use.
+
 ## Installation
 
 Clone this repository and run `sudo python setup.py install`. (Skip the `sudo` if you're on Windows.)
