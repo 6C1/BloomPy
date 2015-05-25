@@ -10,7 +10,7 @@ class BloomFilter(object):
         # Generate k salted hash functions, using murmur
         self._hashes = map(lambda i:                            # for i from 0 to k-1
                            (lambda j:                           # make an anonymous hash function
-                            h(str(j)+str(i*len(j)%(i+1))) % m), # seeded based on i
+                            h(str(j)+str(i*len(str(j))%(i+1))) % m), # seeded based on i
                            xrange(k))
         # Set up counter
         self.len = 0
